@@ -144,7 +144,7 @@ ggplot(data, aes(x = Customer.Type, fill = satisfaction)) +
   scale_fill_brewer(palette = "Set1", labels = c("0(Satisfied)", "1(Neutral/Dissastisfied)"))
 ```
 
-![Satisfaction By Customer Type](isi nanti)
+![Satisfaction By Customer Type](https://github.com/vanyarimta/DAP-PROJECT/blob/fb4b2085dbe5460a6a8bec61aa4a4c80efe24ef9/Barplot%20of%20satisfaction%20by%20customer%20type.png)
 
 Berdasarkan gambar , pelanggan yang tidak loyal cenderung bersikap tidak puas/netral terhadap layanan maskapai penerbangan dibandingkan dengan pelanggan setia.
 
@@ -166,10 +166,10 @@ ggplot(data, aes(x = Type.of.Travel, fill = satisfaction)) +
   coord_flip()
 ```
 
-![Barplot of satisfaction by travel class](isi nanti)
+![Barplot of satisfaction by travel class](https://github.com/vanyarimta/DAP-PROJECT/blob/fb4b2085dbe5460a6a8bec61aa4a4c80efe24ef9/Barplot%20of%20satisfaction%20by%20travel%20class.png)
 Gambar diatas, menunjukkan diagram batang kepuasan berdasarkan kelas perjalanan. Terlihat bahwa pelanggan yang melakukan perjalanan di kelas bisnis cenderung lebih puas dengan pengalaman penerbangan mereka dibandingkan bagi mereka yang bepergian di kelas ekonomi atau ekonomi plus.
 
-![Barplot of satisfaction by type of travel](isi nanti)
+![Barplot of satisfaction by type of travel](https://github.com/vanyarimta/DAP-PROJECT/blob/fb4b2085dbe5460a6a8bec61aa4a4c80efe24ef9/Barplot%20of%20satisfaction%20by%20type%20of%20travel.png)
 Berdasarkan barplot pada gambar 10 penumpang yang melakukan perjalanan untuk keperluan pribadi (kemungkinan besar liburan) memiliki rasio kepuasan yang jauh lebih rendah jika dibandingkan dengan mereka yang bepergian untuk
 tujuan bisnis.
 
@@ -185,7 +185,8 @@ training_set = subset(data, split == TRUE)
 test_set = subset(data, split == FALSE)
 ```
 
-![The training and test set after data partition](isi nanti)
+![The training and test set after data partition](https://github.com/vanyarimta/DAP-PROJECT/blob/e2a8cb0373c6befdeb10422227830e6282436783/The%20training%20and%20test%20set%20after%20data%20partition.png)
+
 Sebelum melatih model, dataset dibagi menjadi 2 bagian. Karena ukuran data yang sangat besar, dataset dibagi dalam rasio 80:20. 80% data masuk ke set pelatihan dan 20% data masuk ke set pengujian. set.seed() dari paket “caTools” digunakan untuk memastikan dapat direproduksi hasil setiap kali kita melakukan proses pemisahan. Gambar 11 menunjukkan bahwa proses pemisahan telah berhasil diselesaikan.
 
 ```R
@@ -194,7 +195,8 @@ prop.table(table(training_set$satisfaction))
 prop.table(table(test_set$satisfaction))
 ```
 
-![Proportion of the target variable in original, training, and test dataset](isi nanti)
+![Proportion of the target variable in original, training, and test dataset](https://github.com/vanyarimta/DAP-PROJECT/blob/e2a8cb0373c6befdeb10422227830e6282436783/%20Proportion%20of%20the%20target%20variable%20in%20original%2C%20training%2C%20and%20test%20dataset.png)
+
 Gambar diatas, menunjukkan bahwa proporsi variabel target, “kepuasan” adalah sama untuk pelatihan, pengujian dan dataset asli.
 
 ### SVM
@@ -281,34 +283,42 @@ confusionMatrix(cm_polydot)
 1) SVM Model (Gaussian RBF)
 
 ![SVM Model (Gaussian RBF)](https://github.com/vanyarimta/DAP-PROJECT/blob/e2a8cb0373c6befdeb10422227830e6282436783/SVM%20Model%20(Gaussian%20RBF).png)
+
 Gambar diatas, menunjukkan model SVM yang dibangun dengan fungsi kernel Gaussian RBF dengan kesalahan pelatihan sebesar 0,037811.
 
 ![Confusion Matrix Results of Training & Test Set](https://github.com/vanyarimta/DAP-PROJECT/blob/e2a8cb0373c6befdeb10422227830e6282436783/Confusion%20Matrix%20Results%20of%20Training%20%26%20Test%20Set.png)
+
 Gambar diatas, menunjukkan perbandingan hasil matriks kebingungan antara set pelatihan dan set pengujian menggunakan fungsi kernel Gaussian RBF. Akurasi set pelatihan adalah 96,2% sedangkan set pengujian akurasinya sedikit lebih rendah, 95,9%.
 
 2) SVM Model (Linear)
 
 ![SVM Model (Linear)](https://github.com/vanyarimta/DAP-PROJECT/blob/e2a8cb0373c6befdeb10422227830e6282436783/SVM%20Model%20(Linear).png)
+
 Gambar diatas, menunjukkan model SVM yang dibangun dengan fungsi kernel linier dengan kesalahan pelatihan sebesar 0,063893.
 
 ![Confusion Matrix Results of Training & Test Set](https://github.com/vanyarimta/DAP-PROJECT/blob/e2a8cb0373c6befdeb10422227830e6282436783/Confusion%20Matrix%20Results%20of%20Training%20%26%20Test%20Set2.png)
+
 Gambar diatas, menunjukkan perbandingan hasil matriks kebingungan antara set pelatihan dan set pengujian menggunakan fungsi kernel Linear. Akurasi set pelatihan adalah 93,6% sedangkan akurasi set pengujian adalah sedikit lebih tinggi, 93,7%
 
 3) SVM Model (Hyperbolic Tangent Sigmoid)
 
 ![SVM Model (Hyperbolic Tangent Sigmoid)](https://github.com/vanyarimta/DAP-PROJECT/blob/e2a8cb0373c6befdeb10422227830e6282436783/SVM%20Model%20(Hyperbolic%20Tangent%20Sigmoid).png)
+
 Gambar diatas, menunjukkan model SVM yang dibangun dengan fungsi kernel sigmoid tangen hiperbolik dengan kesalahan pelatihan 0,431529.
 
 ![Confusion Matrix Results of Training & Test Set](https://github.com/vanyarimta/DAP-PROJECT/blob/e2a8cb0373c6befdeb10422227830e6282436783/Confusion%20Matrix%20Results%20of%20Training%20%26%20Test%20Set3.png)
+
 Gambar diatas, menunjukkan perbandingan hasil matriks kebingungan antara set pelatihan dan set pengujian menggunakan fungsi kernel sigmoid hiperbolik tangen. Akurasi set pelatihan adalah 56,9% sedangkan akurasi set pengujian sedikit lebih tinggi, 57,8%.
 
 4) SVM Model (Polynomial)
 
 ![SVM Model (Polynomial)](https://github.com/vanyarimta/DAP-PROJECT/blob/e2a8cb0373c6befdeb10422227830e6282436783/SVM%20Model%20(Polynomial).png)
+
 Gambar diatas, menunjukkan model SVM yang dibangun dengan fungsi kernel polinomial dengan pelatihan kesalahan sebesar 0,063917.
 
 ![Confusion Matrix Results of Training & Test Set](https://github.com/vanyarimta/DAP-PROJECT/blob/e2a8cb0373c6befdeb10422227830e6282436783/Confusion%20Matrix%20Results%20of%20Training%20%26%20Test%20Set4.png)
-Gambar xx menunjukkan perbandingan hasil matriks kebingungan antara set pelatihan dan set pengujian menggunakan fungsi kernel polinomial. Akurasi set pelatihan adalah 93,6% sedangkan set pengujian akurasinya sedikit lebih tinggi, 93,7%.
+
+Gambar diatas, menunjukkan perbandingan hasil matriks kebingungan antara set pelatihan dan set pengujian menggunakan fungsi kernel polinomial. Akurasi set pelatihan adalah 93,6% sedangkan set pengujian akurasinya sedikit lebih tinggi, 93,7%.
 
 ### Model Tuning
 
@@ -344,9 +354,12 @@ legend(0.3, 0.2, legend = c("test-svm"), lty = c(1), col = c("blue"))
 pred_ROCR <- prediction(training_set$satisfaction, classifier_rbf_cost3)
 ```
 ![Model Tuning](isi nanti)
+
 Karena kernel Gaussian RBF memberikan hasil terbaik, maka kernel ini dipilih sebagai pilihan fungsi dalam fase penyetelan model. Selama fase penyetelan model, parameter biaya, C ditingkatkan dari 1 ke 3. Hal ini mengakibatkan peningkatan minimal dalam akurasi set pengujian dan pelatihan.
 
 ### Results
-![Results](isi nanti)
+
+![Results]()
+
 Tabel di atas menunjukkan hasil keseluruhan dari berbagai model SVM yang dibangun menggunakan berbagai fungsi kernel. Fungsi kernel menentukan pemetaan nonlinier seperti basis radial, polinomial, hiperbolik tangen sigmoid atau linier. Fungsi ksvm() akan menggunakan kernel Gaussian RBF secara default. Pada dataset ini, model SVM yang dibangun menggunakan fungsi kernel Gaussian RBF mengungguli model lainnya model yang dibangun menggunakan fungsi yang berbeda. Hasil ini diharapkan sebagai fungsi kernel Gaussian RBF adalah fungsi yang populer karena kinerjanya yang baik yang ditunjukkan di masa lalu untuk banyak jenis data (Lantz,2019)
 
