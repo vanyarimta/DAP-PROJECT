@@ -82,4 +82,54 @@ ggplot(data = melted_cormat, aes(x=Var1, y=Var2, fill=value)) +
                                    size = 12, hjust = 1)) +
   theme(axis.text.y = element_text(size = 12))
 ```
+![Correlation heatmap of all variables](https://github.com/vanyarimta/DAP-PROJECT/blob/b76ef9402eda25ca6ab36468c47b9d8c5f6b8236/Correlation%20heatmap%20of%20all%20variables.png)
+
+Berdasarkan peta panas korelasi, terdapat korelasi yang kuat antara keterlambatan kedatangan dan keterlambatan keberangkatan (korelasi Pearson = 0,97). Karena ada beberapa nilai yang hilang dalam “Arrival.Delay.In.Minutes”, mereka akan diperhitungkan dengan data dari “Departure.Delay.In.Minutes”. Ini sangat masuk akal karena jika waktu keberangkatan pesawat tertunda 5 menit, waktu kedatangan juga harus tertunda sekitar 5 menit. 
+
+Menariknya, keterlambatan keberangkatan pesawat tidak mempengaruhi tingkat kepuasan pelanggan karena koefisien korelasinya mendekati 0. Sebaliknya, variabel seperti kenyamanan tempat duduk, pembelian online Layanan boarding dan layanan wifi dalam pesawat memiliki pengaruh yang lebih besar dalam mempengaruhi keputusan tingkat kepuasan pelanggan.
+  
+Selain itu, kebersihan tampaknya berkorelasi dengan makanan dan minuman, kenyamanan tempat duduk, dan hiburan penerbangan. Selain itu, “ease of booking” sangat berkorelasi dengan layanan wifi dalam pesawat dengan nilai korelasi pearson sebesar 0,72. Hal ini mungkin menunjukkan bahwa jika layanan wifi dalam pesawat sangat baik, Pelanggan akan memiliki koneksi yang stabil dan cepat untuk melakukan pemesanan online dan dengan demikian memberikan peluang yang tinggi peringkat untuk “Ease.of.Online.Booking”.
+
+
+6) Imputasi Nilai yang Hilang
+
+```R
+data = data %>%
+  mutate(Arrival.Delay.in.Minutes= coalesce(Arrival.Delay.in.Minutes ,Departure.Delay.in.Minutes))
+colSums(is.na(data))
+```
+Setelah memasukkan data “Arrival.Delay.in.Minutes” dengan nilai dari
+“Departure.Delay.in.Minutes”, kumpulan data sekarang sempurna dan bebas dari nilai yang hilang.
+
+7) Penghapusan variabel yang sangat berkorelasi
+
+```R
+data= data%>%select(-'Arrival.Delay.in.Minutes')
+```
+
+Diketahui bahwa keterlambatan kedatangan dan keterlambatan keberangkatan mempunyai korelasi yang sangat tinggi yaitu sebesar 0,97.
+alasannya, variabel keterlambatan kedatangan dihilangkan dari dataset karena fitur yang sangat berkorelasi
+tidak akan memberikan informasi tambahan saat membangun model, tetapi akan meningkatkan
+kompleksitas algoritma dan risiko kesalahan. Sekarang hanya ada 22 variabel yang tersisa di
+kumpulan data.
+
+## Analisis Data Eksploratif
+
+a) Proporsi Variabel Sasaran (Satisfaction)
+```R
+#1. Barplot of target variable 
+satisfaction_plot = as.data.frame(table(data$satisfaction))
+print(satisfaction_plot)
+names(satisfaction_plot) = c('col1', 'col2')
+
+satisfaction_plot %>% 
+  count(Satisfaction = factor(col1), Frequency = col2) %>% 
+  mutate(Percentage = prop.table(Frequency)) %>% 
+  ggplot(aes(x = Satisfaction, y = Percentage, fill = Frequency, label = scales::percent(Percentage))) + 
+  geom_col(position = 'dodge') + 
+  geom_text( vjust = 0) + 
+  scale_y_continuous(labels = scales::percent)
+```
+
+
 
