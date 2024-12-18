@@ -353,13 +353,13 @@ legend(0.3, 0.2, legend = c("test-svm"), lty = c(1), col = c("blue"))
 
 pred_ROCR <- prediction(training_set$satisfaction, classifier_rbf_cost3)
 ```
-![Model Tuning](isi nanti)
+![Model Tuning](https://github.com/vanyarimta/DAP-PROJECT/blob/7364aaef1a35fd913278098efa4f08d04fdc6c88/Model%20Tuning.png)
 
 Karena kernel Gaussian RBF memberikan hasil terbaik, maka kernel ini dipilih sebagai pilihan fungsi dalam fase penyetelan model. Selama fase penyetelan model, parameter biaya, C ditingkatkan dari 1 ke 3. Hal ini mengakibatkan peningkatan minimal dalam akurasi set pengujian dan pelatihan.
 
 ### Results
 
-![Results]()
+![Results](https://github.com/vanyarimta/DAP-PROJECT/blob/7364aaef1a35fd913278098efa4f08d04fdc6c88/Results.png)
 
 Tabel di atas menunjukkan hasil keseluruhan dari berbagai model SVM yang dibangun menggunakan berbagai fungsi kernel. Fungsi kernel menentukan pemetaan nonlinier seperti basis radial, polinomial, hiperbolik tangen sigmoid atau linier. Fungsi ksvm() akan menggunakan kernel Gaussian RBF secara default. Pada dataset ini, model SVM yang dibangun menggunakan fungsi kernel Gaussian RBF mengungguli model lainnya model yang dibangun menggunakan fungsi yang berbeda. Hasil ini diharapkan sebagai fungsi kernel Gaussian RBF adalah fungsi yang populer karena kinerjanya yang baik yang ditunjukkan di masa lalu untuk banyak jenis data (Lantz,2019)
 
