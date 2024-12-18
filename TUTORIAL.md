@@ -4,7 +4,7 @@
 
 ```R
 getwd()
-data = read.csv('/Users/promac/Downloads/Predicting-Satisfaction-Of-Airline-Customers-master/airlinedata.csv')
+data = read.csv('')
 ```
 
 ## Data Cleaning and Pre-processing
@@ -56,6 +56,30 @@ plot_missing(data)
 colSums(is.na(data))
 ```
 
+![Plot of missing data](https://github.com/vanyarimta/DAP-PROJECT/blob/5a11f0851237a51ad20db4b9f80e945ce7f44d4d/Plot%20of%20missing%20data.png)
 
-Berdasarkan Gambar, hanya variabel “Arrival.Delay.In.Minutes” yang memiliki nilai yang hilang.
+Berdasarkan Gambar diatas, hanya variabel “Arrival.Delay.In.Minutes” yang memiliki nilai yang hilang.
 sekitar 0,3% data yang hilang pada variabel tertentu.
+
+5) Analisis Korelasi Variabel
+
+```R
+library(ggplot2)
+ggplot(data = melted_cormat, aes(x=Var1, y=Var2, fill=value)) + 
+  geom_tile(color = 'white')+
+  scale_fill_gradient2(low = "blue", high = "red", mid = "white", 
+                       midpoint = 0, limit = c(-1,1), space = "Lab", 
+                       name="Pearson\nCorrelation") +
+  theme_minimal()+ 
+  geom_text(aes(Var2, Var1, label = sprintf(value, fmt = '%#.2f') ), color = "black", size = 3.8) +
+  theme(
+    axis.title.x = element_blank(),
+    axis.title.y = element_blank(),
+    panel.grid.major = element_blank(),
+    panel.border = element_blank(),
+    panel.background = element_blank())+
+  theme(axis.text.x = element_text(angle = 45, vjust = 1, 
+                                   size = 12, hjust = 1)) +
+  theme(axis.text.y = element_text(size = 12))
+```
+
