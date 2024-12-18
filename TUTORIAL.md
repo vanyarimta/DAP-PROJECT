@@ -280,34 +280,34 @@ confusionMatrix(cm_polydot)
 
 1) SVM Model (Gaussian RBF)
 
-![SVM Model (Gaussian RBF)](isi nanti)
+![SVM Model (Gaussian RBF)](https://github.com/vanyarimta/DAP-PROJECT/blob/e2a8cb0373c6befdeb10422227830e6282436783/SVM%20Model%20(Gaussian%20RBF).png)
 Gambar diatas, menunjukkan model SVM yang dibangun dengan fungsi kernel Gaussian RBF dengan kesalahan pelatihan sebesar 0,037811.
 
-![Confusion Matrix Results of Training & Test Set](isi nanti)
+![Confusion Matrix Results of Training & Test Set](https://github.com/vanyarimta/DAP-PROJECT/blob/e2a8cb0373c6befdeb10422227830e6282436783/Confusion%20Matrix%20Results%20of%20Training%20%26%20Test%20Set.png)
 Gambar diatas, menunjukkan perbandingan hasil matriks kebingungan antara set pelatihan dan set pengujian menggunakan fungsi kernel Gaussian RBF. Akurasi set pelatihan adalah 96,2% sedangkan set pengujian akurasinya sedikit lebih rendah, 95,9%.
 
 2) SVM Model (Linear)
 
-![SVM Model (Linear)](isi nanti)
+![SVM Model (Linear)](https://github.com/vanyarimta/DAP-PROJECT/blob/e2a8cb0373c6befdeb10422227830e6282436783/SVM%20Model%20(Linear).png)
 Gambar diatas, menunjukkan model SVM yang dibangun dengan fungsi kernel linier dengan kesalahan pelatihan sebesar 0,063893.
 
-![Confusion Matrix Results of Training & Test Set](isi nanti)
+![Confusion Matrix Results of Training & Test Set](https://github.com/vanyarimta/DAP-PROJECT/blob/e2a8cb0373c6befdeb10422227830e6282436783/Confusion%20Matrix%20Results%20of%20Training%20%26%20Test%20Set2.png)
 Gambar diatas, menunjukkan perbandingan hasil matriks kebingungan antara set pelatihan dan set pengujian menggunakan fungsi kernel Linear. Akurasi set pelatihan adalah 93,6% sedangkan akurasi set pengujian adalah sedikit lebih tinggi, 93,7%
 
 3) SVM Model (Hyperbolic Tangent Sigmoid)
 
-![SVM Model (Hyperbolic Tangent Sigmoid)](isi nanti)
+![SVM Model (Hyperbolic Tangent Sigmoid)](https://github.com/vanyarimta/DAP-PROJECT/blob/e2a8cb0373c6befdeb10422227830e6282436783/SVM%20Model%20(Hyperbolic%20Tangent%20Sigmoid).png)
 Gambar diatas, menunjukkan model SVM yang dibangun dengan fungsi kernel sigmoid tangen hiperbolik dengan kesalahan pelatihan 0,431529.
 
-![Confusion Matrix Results of Training & Test Set](isi nanti)
+![Confusion Matrix Results of Training & Test Set](https://github.com/vanyarimta/DAP-PROJECT/blob/e2a8cb0373c6befdeb10422227830e6282436783/Confusion%20Matrix%20Results%20of%20Training%20%26%20Test%20Set3.png)
 Gambar diatas, menunjukkan perbandingan hasil matriks kebingungan antara set pelatihan dan set pengujian menggunakan fungsi kernel sigmoid hiperbolik tangen. Akurasi set pelatihan adalah 56,9% sedangkan akurasi set pengujian sedikit lebih tinggi, 57,8%.
 
 4) SVM Model (Polynomial)
 
-![SVM Model (Polynomial)](isi nanti)
+![SVM Model (Polynomial)](https://github.com/vanyarimta/DAP-PROJECT/blob/e2a8cb0373c6befdeb10422227830e6282436783/SVM%20Model%20(Polynomial).png)
 Gambar diatas, menunjukkan model SVM yang dibangun dengan fungsi kernel polinomial dengan pelatihan kesalahan sebesar 0,063917.
 
-![Confusion Matrix Results of Training & Test Set](isi nanti)
+![Confusion Matrix Results of Training & Test Set](https://github.com/vanyarimta/DAP-PROJECT/blob/e2a8cb0373c6befdeb10422227830e6282436783/Confusion%20Matrix%20Results%20of%20Training%20%26%20Test%20Set4.png)
 Gambar xx menunjukkan perbandingan hasil matriks kebingungan antara set pelatihan dan set pengujian menggunakan fungsi kernel polinomial. Akurasi set pelatihan adalah 93,6% sedangkan set pengujian akurasinya sedikit lebih tinggi, 93,7%.
 
 ### Model Tuning
