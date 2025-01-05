@@ -345,9 +345,10 @@ confusionMatrix(cm_rbf_cost3)
 ```
 
 ![Model Tuning](https://github.com/vanyarimta/DAP-PROJECT/blob/7364aaef1a35fd913278098efa4f08d04fdc6c88/Model%20Tuning.png)
+Karena kernel Gaussian RBF memberikan hasil terbaik, maka kernel ini dipilih sebagai pilihan fungsi dalam fase penyetelan model. Selama fase penyetelan model, parameter biaya, C ditingkatkan dari 1 ke 3. Hal ini mengakibatkan peningkatan minimal dalam akurasi set pengujian dan pelatihan.
 
-```R
-#ROC Curve + AUC Score 
+### ROC Curve
+```R 
 library(pROC)
 roc(training_set$satisfaction, classifier_rbf_cost3$votes[,1], plot=TRUE, legacy.axes=TRUE, percent=TRUE, xlab="False Positive Percentage", ylab="True Postive Percentage", col="#4daf4a", lwd=4, print.auc=TRUE)
 
@@ -357,13 +358,140 @@ legend(0.3, 0.2, legend = c("test-svm"), lty = c(1), col = c("blue"))
 
 pred_ROCR <- prediction(training_set$satisfaction, classifier_rbf_cost3)
 ```
-![roc_curve](https://github.com/vanyarimta/DAP-PROJECT/blob/7364aaef1a35fd913278098efa4f08d04fdc6c88/Model%20Tuning.png)
+![roc_curve](https://github.com/vanyarimta/DAP-PROJECT/blob/6a030594f9c3f60a7197e431746aa75482d218db/roc_curve.png)
 
-Karena kernel Gaussian RBF memberikan hasil terbaik, maka kernel ini dipilih sebagai pilihan fungsi dalam fase penyetelan model. Selama fase penyetelan model, parameter biaya, C ditingkatkan dari 1 ke 3. Hal ini mengakibatkan peningkatan minimal dalam akurasi set pengujian dan pelatihan.
 
 ### Results
 
 ![Results](https://github.com/vanyarimta/DAP-PROJECT/blob/7364aaef1a35fd913278098efa4f08d04fdc6c88/Results.png)
 
 Tabel di atas menunjukkan hasil keseluruhan dari berbagai model SVM yang dibangun menggunakan berbagai fungsi kernel. Fungsi kernel menentukan pemetaan nonlinier seperti basis radial, polinomial, hiperbolik tangen sigmoid atau linier. Fungsi ksvm() akan menggunakan kernel Gaussian RBF secara default. Pada dataset ini, model SVM yang dibangun menggunakan fungsi kernel Gaussian RBF mengungguli model lainnya model yang dibangun menggunakan fungsi yang berbeda. Hasil ini diharapkan sebagai fungsi kernel Gaussian RBF adalah fungsi yang populer karena kinerjanya yang baik yang ditunjukkan di masa lalu untuk banyak jenis data (Lantz,2019)
+
+### Visualisasi SVM Model 
+Ini merupakan visualisasi pada setiap kernel berdasarkan Ease.of.Online.booking dan Inflight.wifi.service terhadap Satisfaction(kepuasan pelanggan) 
+
+```R
+# Load libraries
+library(kernlab)
+library(ggplot2)
+
+# Generate synthetic data for demonstration
+set.seed(123)
+n <- 200
+data <- data.frame(
+  Ease.of.Online.booking = runif(n, 1, 10),
+  Inflight.wifi.service = runif(n, 1, 10),
+  satisfaction = factor(sample(c("Satisfied", "Dissatisfied"), n, replace = TRUE))
+)
+
+# Split data into training and testing sets
+set.seed(123)
+train_index <- sample(1:n, n * 0.8)
+training_set <- data[train_index, ]
+test_set <- data[-train_index, ]
+
+# Function to visualize SVM decision boundary, hyperplane, and margins
+# Function to visualize SVM decision boundary, hyperplane, margins, and accuracy
+visualize_svm <- function(model, data, kernel_name, test_set) {
+  # Create a grid for predictions
+  x_min <- min(data$Ease.of.Online.booking) - 1
+  x_max <- max(data$Ease.of.Online.booking) + 1
+  y_min <- min(data$Inflight.wifi.service) - 1
+  y_max <- max(data$Inflight.wifi.service) + 1
+  grid <- expand.grid(
+    Ease.of.Online.booking = seq(x_min, x_max, length.out = 100),
+    Inflight.wifi.service = seq(y_min, y_max, length.out = 100)
+  )
+  
+  # Predict on the grid using the trained model
+  grid$prediction <- predict(model, newdata = grid)
+  grid$decision_function <- predict(model, newdata = grid, type = "decision")
+  
+  # Get support vectors and decision boundary
+  support_vectors <- data[model@SVindex, ]
+  
+  # Extract the coefficients and intercept to draw the hyperplane
+  alpha <- model@coef[[1]]
+  support_vector_points <- model@xmatrix[[1]]
+  intercept <- model@b
+  
+  # Calculate the margin lines: decision boundary (0), positive margin (+1), and negative margin (-1)
+  margin_positive <- function(x) (-alpha[1] * x - intercept) / alpha[2]
+  margin_negative <- function(x) (-alpha[1] * x - intercept + 1) / alpha[2]
+  margin_other_negative <- function(x) (-alpha[1] * x - intercept - 1) / alpha[2]
+  
+  # Predict on the test set to calculate accuracy
+  predictions <- predict(model, newdata = test_set)
+  accuracy <- sum(predictions == test_set$satisfaction) / nrow(test_set)
+  
+  # Plot decision boundary, margins, support vectors, and accuracy
+  ggplot() +
+    geom_tile(data = grid, aes(x = Ease.of.Online.booking, y = Inflight.wifi.service, fill = prediction), alpha = 0.3) + 
+    geom_point(data = data, aes(x = Ease.of.Online.booking, y = Inflight.wifi.service, color = satisfaction), size = 3) +
+    geom_point(data = support_vectors, aes(x = Ease.of.Online.booking, y = Inflight.wifi.service), color = "black", size = 4, shape = 3) +  # Support vectors
+    scale_fill_manual(values = c("lightblue", "lightpink"), guide = "none") +
+    scale_color_manual(values = c("blue", "red")) +
+    labs(title = paste("SVM Decision Boundary with Hyperplane (Kernel:", kernel_name, ") - Accuracy:", round(accuracy * 100, 2), "%"),
+         x = "Ease of Online Booking", 
+         y = "Inflight Wifi Service") +
+    theme_minimal() +
+    theme(plot.title = element_text(hjust = 0.5)) +
+    # Add the decision boundary and margins
+    geom_abline(slope = -alpha[1] / alpha[2], intercept = -intercept / alpha[2], color = "black", linetype = "solid") +  # Hyperplane
+    geom_abline(slope = -alpha[1] / alpha[2], intercept = (-intercept + 1) / alpha[2], color = "red", linetype = "dashed") + # Positive margin
+    geom_abline(slope = -alpha[1] / alpha[2], intercept = (-intercept - 1) / alpha[2], color = "red", linetype = "dashed") + # Negative margin
+    geom_abline(slope = -alpha[1] / alpha[2], intercept = -intercept / alpha[2], color = "black", linetype = "solid") # Margin lines
+}
+```
+
+### Model SVM with 'vanilladot' kernel
+![Results](https://github.com/vanyarimta/DAP-PROJECT/blob/7364aaef1a35fd913278098efa4f08d04fdc6c88/Results.png)
+
+```R
+model_vanilladot <- ksvm(
+  satisfaction ~ Ease.of.Online.booking + Inflight.wifi.service,
+  data = training_set,
+  kernel = "vanilladot"
+)
+plot_vanilladot <- visualize_svm(model_vanilladot, training_set, "vanilladot", test_set)
+print(plot_vanilladot)
+
+# Model SVM with 'rbfdot' kernel
+model_rbfdot <- ksvm(
+  satisfaction ~ Ease.of.Online.booking + Inflight.wifi.service,
+  data = training_set,
+  kernel = "rbfdot"
+)
+plot_rbfdot <- visualize_svm(model_rbfdot, training_set, "rbfdot", test_set)
+print(plot_rbfdot)
+```
+
+### Model SVM with 'tanhdot' kernel
+![Results](https://github.com/vanyarimta/DAP-PROJECT/blob/7364aaef1a35fd913278098efa4f08d04fdc6c88/Results.png)
+
+```R
+model_tanhdot <- ksvm(
+  satisfaction ~ Ease.of.Online.booking + Inflight.wifi.service,
+  data = training_set,
+  kernel = "tanhdot"
+)
+plot_tanhdot <- visualize_svm(model_tanhdot, training_set, "tanhdot", test_set)
+print(plot_tanhdot)
+```
+
+
+### Model SVM with 'polydot' kernel
+![Results](https://github.com/vanyarimta/DAP-PROJECT/blob/7364aaef1a35fd913278098efa4f08d04fdc6c88/Results.png)
+
+```R
+model_polydot <- ksvm(
+  satisfaction ~ Ease.of.Online.booking + Inflight.wifi.service,
+  data = training_set,
+  kernel = "polydot"
+)
+plot_polydot <- visualize_svm(model_polydot, training_set, "polydot", test_set)
+print(plot_polydot)
+```
+
+
 
