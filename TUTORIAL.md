@@ -445,7 +445,7 @@ visualize_svm <- function(model, data, kernel_name, test_set) {
 ```
 
 ### Model SVM with 'vanilladot' kernel
-![Results](https://github.com/vanyarimta/DAP-PROJECT/blob/7364aaef1a35fd913278098efa4f08d04fdc6c88/Results.png)
+![SVM Vanilladot](https://github.com/vanyarimta/DAP-PROJECT/blob/6f69418b0a0702017ca7049309811d14ba820179/svm%20vanilladot.png)
 
 ```R
 model_vanilladot <- ksvm(
@@ -455,8 +455,13 @@ model_vanilladot <- ksvm(
 )
 plot_vanilladot <- visualize_svm(model_vanilladot, training_set, "vanilladot", test_set)
 print(plot_vanilladot)
+```
 
-# Model SVM with 'rbfdot' kernel
+
+### Model SVM with 'rbfdot' kernel
+![SVM RBF](https://github.com/vanyarimta/DAP-PROJECT/blob/6f69418b0a0702017ca7049309811d14ba820179/svm%20rbfdot.png)
+
+```R
 model_rbfdot <- ksvm(
   satisfaction ~ Ease.of.Online.booking + Inflight.wifi.service,
   data = training_set,
@@ -467,7 +472,7 @@ print(plot_rbfdot)
 ```
 
 ### Model SVM with 'tanhdot' kernel
-![Results](https://github.com/vanyarimta/DAP-PROJECT/blob/7364aaef1a35fd913278098efa4f08d04fdc6c88/Results.png)
+![SVM Tanhdot](https://github.com/vanyarimta/DAP-PROJECT/blob/6f69418b0a0702017ca7049309811d14ba820179/svm%20tanhdot.png)
 
 ```R
 model_tanhdot <- ksvm(
@@ -481,7 +486,7 @@ print(plot_tanhdot)
 
 
 ### Model SVM with 'polydot' kernel
-![Results](https://github.com/vanyarimta/DAP-PROJECT/blob/7364aaef1a35fd913278098efa4f08d04fdc6c88/Results.png)
+![SVM Polydot](https://github.com/vanyarimta/DAP-PROJECT/blob/6f69418b0a0702017ca7049309811d14ba820179/svm%20polydot.png)
 
 ```R
 model_polydot <- ksvm(
@@ -493,5 +498,6 @@ plot_polydot <- visualize_svm(model_polydot, training_set, "polydot", test_set)
 print(plot_polydot)
 ```
 
-
-
+### Kesimpulan
+  Dalam kasus ini, kernel tanhdot menunjukkan akurasi sebesar 40%, yang lebih tinggi dibandingkan dengan kernel lainnya seperti vanilladot (32.5%), rbfdot (25%), dan polydot (32.5%). Meskipun kernel rbfdot secara keseluruhan lebih akurat dalam banyak kasus karena kemampuannya menangani data non-linier dengan baik, pada data ini, kernel tanhdot berhasil menangkap pola yang lebih kompleks, memberikan hasil yang lebih baik dalam memisahkan kelas "Satisfied" dan "Dissatisfied." Ini mengindikasikan bahwa, meskipun kernel rbfdot umumnya lebih kuat dalam menangani data non-linier, pada dataset ini kernel tanhdot menawarkan performa yang lebih baik karena sifatnya yang lebih fleksibel dalam menggambarkan margin keputusan yang tidak hanya bergantung pada jarak antar titik, tetapi juga pada dinamika kompleks dari data tersebut.
+  Salah satu faktor yang mungkin berperan dalam hal ini adalah fitur yang digunakan: Ease of Online Booking dan Inflight Wifi Service. Fitur-fitur ini mencerminkan aspek pengalaman pengguna yang bersifat kontinu dan dapat dipengaruhi oleh banyak faktor. Kernel tanhdot, yang didasarkan pada fungsi aktivasi tangens hyperbolik, mungkin lebih efektif dalam menangkap hubungan non-linear yang lebih dalam antar fitur tersebut, yang mungkin kurang dapat diungkapkan dengan baik oleh kernel rbfdot. Dengan data yang memiliki interaksi yang kompleks, kernel tanhdot mampu memberikan pemisahan yang lebih baik berdasarkan hubungan antar fitur yang lebih halus.
