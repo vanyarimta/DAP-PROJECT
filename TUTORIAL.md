@@ -342,7 +342,11 @@ predict_test_rbf_cost3 = predict(classifier_rbf_cost3, test_set)
 #evaluating model prediction with confusion matrix
 cm_rbf_cost3 = table(predict_test_rbf_cost3, test_set$satisfaction)
 confusionMatrix(cm_rbf_cost3)
+```
 
+![Model Tuning](https://github.com/vanyarimta/DAP-PROJECT/blob/7364aaef1a35fd913278098efa4f08d04fdc6c88/Model%20Tuning.png)
+
+```R
 #ROC Curve + AUC Score 
 library(pROC)
 roc(training_set$satisfaction, classifier_rbf_cost3$votes[,1], plot=TRUE, legacy.axes=TRUE, percent=TRUE, xlab="False Positive Percentage", ylab="True Postive Percentage", col="#4daf4a", lwd=4, print.auc=TRUE)
