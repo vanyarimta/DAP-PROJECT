@@ -357,7 +357,7 @@ legend(0.3, 0.2, legend = c("test-svm"), lty = c(1), col = c("blue"))
 
 pred_ROCR <- prediction(training_set$satisfaction, classifier_rbf_cost3)
 ```
-![Model Tuning](https://github.com/vanyarimta/DAP-PROJECT/blob/7364aaef1a35fd913278098efa4f08d04fdc6c88/Model%20Tuning.png)
+![roc_curve](https://github.com/vanyarimta/DAP-PROJECT/blob/7364aaef1a35fd913278098efa4f08d04fdc6c88/Model%20Tuning.png)
 
 Karena kernel Gaussian RBF memberikan hasil terbaik, maka kernel ini dipilih sebagai pilihan fungsi dalam fase penyetelan model. Selama fase penyetelan model, parameter biaya, C ditingkatkan dari 1 ke 3. Hal ini mengakibatkan peningkatan minimal dalam akurasi set pengujian dan pelatihan.
 
